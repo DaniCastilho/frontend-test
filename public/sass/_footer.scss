@@ -1,0 +1,8 @@
+.page__footer {
+    background: url("../img/full_footer.jpg") no-repeat center top transparent;
+    height: 45px;
+
+    @media (max-width: 320px) {
+    	display: none;
+    }
+}

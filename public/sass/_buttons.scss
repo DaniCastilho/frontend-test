@@ -1,0 +1,27 @@
+.chat__button {
+    display: inline-block;
+    background: url("../img/sprite.png") no-repeat 0 0 transparent;
+    width: 18px;
+    height: 18px;
+}
+
+.button--minimize {
+    background-position: -53px 0;
+    margin-right: 10px;
+}
+
+.button--maximize {
+    background-position: -74px -2px;
+    display: none;
+    margin-right: 10px;
+}
+
+.button--close {
+    background-position: -33px 0;
+}
+
+@media (max-width: 320px) {
+   .button--minimize, .button--maximize{
+    display: none;
+   }
+}

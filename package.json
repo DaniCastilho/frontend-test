@@ -12,5 +12,9 @@
   "dependencies": {
     "express": "^4.13.3",
     "shell-arguments": "^1.0.4"
+  },
+  "devDependencies": {
+    "gulp-sass": "^2.3.2",
+    "gulp-compass": "^2.1.0"
   }
 }

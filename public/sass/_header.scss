@@ -1,0 +1,9 @@
+.page__header {
+    background: url("../img/full_header.jpg") no-repeat center top transparent;
+    height: 71px;
+
+     @media (max-width: 320px) {
+    	display: none;
+    }
+}
+
