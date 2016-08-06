@@ -89,6 +89,9 @@ strong {
     font-size: 14px;
     color: #666;
     font-style: italic; }
+    @media (max-width: 320px) {
+      .content__chat .chat__boxMessage {
+        width: 290px; } }
 
 .chat__messages {
   width: 100%;
@@ -99,11 +102,8 @@ strong {
   .chat__messages .message {
     height: auto;
     width: 100%;
-    min-height: 92px;
-    margin-bottom: 10px; }
-    @media (max-width: 320px) {
-      .chat__messages .message {
-        min-height: 112px; } }
+    margin-bottom: 10px;
+    display: table; }
     .chat__messages .message .message__avatar {
       width: 92px;
       height: 92px; }
@@ -117,33 +117,35 @@ strong {
       background: #dddddd;
       font-style: italic;
       font-family: "Arial";
-      font-size: 16px;
+      font-size: 1em;
       color: #666;
-      padding: 10px 10px 30px;
+      padding: 10px 10px 20px;
       position: relative;
       line-height: 1.2;
       word-wrap: break-word; }
       @media (max-width: 320px) {
         .chat__messages .message .message__text {
-          width: 220px; } }
+          width: 220px;
+          line-height: 1em; } }
       .chat__messages .message .message__text .message__time {
-        font-size: 11px;
-        position: absolute;
-        bottom: 5px; }
+        font-size: 11px; }
       .chat__messages .message .message__text .message__user {
         font-size: 14px;
-        position: absolute;
-        bottom: 15px; }
+        display: block;
+        margin-top: 20px; }
+        @media (max-width: 320px) {
+          .chat__messages .message .message__text .message__user {
+            margin-top: 20px !important; } }
       .chat__messages .message .message__text.message--right {
-        padding-left: 140px; }
+        padding-left: 150px; }
         @media (max-width: 320px) {
           .chat__messages .message .message__text.message--right {
-            padding: 0; } }
+            padding: 10px; } }
       .chat__messages .message .message__text.message--left {
         padding-right: 140px; }
         @media (max-width: 320px) {
           .chat__messages .message .message__text.message--left {
-            padding: 0; } }
+            padding: 10px; } }
     .chat__messages .message .message--right {
       float: right; }
       .chat__messages .message .message--right:after {
@@ -158,10 +160,18 @@ strong {
         border-color: rgba(221, 221, 221, 0);
         border-right-color: #ddd;
         border-width: 8px; }
-      .chat__messages .message .message--right .message__time,
+      .chat__messages .message .message--right .message__company,
       .chat__messages .message .message--right .message__user,
-      .chat__messages .message .message--right .message__company {
-        left: 5px; }
+      .chat__messages .message .message--right .message__time {
+        float: left;
+        margin-left: -130px;
+        clear: both; }
+        @media (max-width: 320px) {
+          .chat__messages .message .message--right .message__company,
+          .chat__messages .message .message--right .message__user,
+          .chat__messages .message .message--right .message__time {
+            margin: 0;
+            float: none; } }
     .chat__messages .message .message--left {
       float: left; }
       .chat__messages .message .message--left:after {
@@ -176,18 +186,20 @@ strong {
         border-color: rgba(221, 221, 221, 0);
         border-left-color: #ddd;
         border-width: 8px; }
-      .chat__messages .message .message--left .message__time,
+      .chat__messages .message .message--left .message__company,
       .chat__messages .message .message--left .message__user,
-      .chat__messages .message .message--left .message__company {
-        right: 5px; }
-    .chat__messages .message .message--company {
-      height: 92px; }
-      .chat__messages .message .message--company .message__user {
-        bottom: 35px; }
-      .chat__messages .message .message--company .message__company {
-        font-size: 14px;
-        position: absolute;
-        bottom: 18px; }
+      .chat__messages .message .message--left .message__time {
+        float: right;
+        margin-right: -130px;
+        clear: both; }
+        @media (max-width: 320px) {
+          .chat__messages .message .message--left .message__company,
+          .chat__messages .message .message--left .message__user,
+          .chat__messages .message .message--left .message__time {
+            margin: 0; } }
+    .chat__messages .message .message--company .message__company {
+      font-size: 14px;
+      display: block; }
     .chat__messages .message .message--read:before,
     .chat__messages .message .message--unread:before {
       content: "";
@@ -195,9 +207,8 @@ strong {
       width: 16px;
       height: 16px;
       background: url("../img/sprite.png") no-repeat 0 0 transparent;
-      float: left;
       position: absolute;
-      bottom: 10px; }
+      bottom: 15px; }
     .chat__messages .message .message--read:before {
       background-position: -18px -2px; }
     .chat__messages .message .message--unread:before {

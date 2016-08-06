@@ -6,9 +6,9 @@ var userCompany;
 var time;
 var timestampMessage;
 
-$(function() {
+$(window).on('load', function() {
 
-
+	//manipulating buttons
     $('.button--close, .button--minimize, .button--maximize').on('click', function(e) {
         _this = $(this);
         if (_this.hasClass('button--close')) {
@@ -21,12 +21,13 @@ $(function() {
 
     });
 
-
+    //close chat
     function closeChat(e) {
         e.preventDefault();
         $('.content__chat').hide();
     }
 
+    //minimize chat
     function minimizeChat(e) {
         e.preventDefault();
         $('.content__chat').css('height', 38);
@@ -37,6 +38,7 @@ $(function() {
         }, 50)
     }
 
+    //maximize chat
     function maximizeChat(e) {
         e.preventDefault();
         $('.chat__messages, .chat__writeMessage, .button--minimize').show();
@@ -44,13 +46,14 @@ $(function() {
         $('.button--maximize').hide();
     }
 
-
+    //get list messages
     $.getJSON("/static/json/talk.json", function(data) {
         getAllMessages(data);
     });
 
 
 
+    //list messages
     function getAllMessages(data) {
         allMessages = data.talkMessages;
 
@@ -61,7 +64,7 @@ $(function() {
 
 
 
-
+    //read a message
     function getMessage(message) {
         message = message;
 
@@ -79,37 +82,35 @@ $(function() {
         timestampMessage = message.message.time;
 
 
-
-	      writeMessagesOnChat(userId, userName, userMessage, userCompany, timestampMessage, readMessage);
+	     writeMessagesOnChat(userId, userName, userMessage, userCompany, timestampMessage, readMessage);
 
     }
 
 
 
-
+    //write messages on chat
     function writeMessagesOnChat(userId, userName, userMessage, userCompany, timestampMessage, readMessage) {
-        var divMessage = $('<div/>').addClass('message');
+        
+
+        //get image avatar
         var name = userName.split(' ');
         var image = '/static/img/' + name[0] + '.jpg';
-        var textMessage = $('<p/>').addClass('message__text').text(userMessage);
-        var avatar = $('<img/>').attr('src', image).addClass('message__avatar');
-        var messageUserName = $('<span/>').addClass('message__user').text(userName);
 
+        
+        //convert timestamp to hours
         time = new Date(timestampMessage * 1000).toString().match(/(\d{2}:\d{2})/);;
         formatTime = time[0].split(':');
         hours = formatTime[0];
         minutes = formatTime[1];
 
-        console.log(time)
-        if (minutes.length < 2){
-        	
-            time = hours + 'h' + minutes;
-        }
-        else {
-            time = hours + 'h' + minutes;
-        }
 
-        var timeStamp = $('<span/>').addClass('message__time').text('enviado às' + time);
+        //building a message
+        var divMessage = $('<div/>').addClass('message');
+        var textMessage = $('<p/>').addClass('message__text').text(userMessage);
+        var avatar = $('<img/>').attr('src', image).addClass('message__avatar');
+        var messageUserName = $('<span/>').addClass('message__user').text(userName);
+        var timeStamp = $('<span/>').addClass('message__time').text('enviado às ' + hours + 'h' + minutes);
+
         if (userCompany != null) {
             textMessage.addClass('message--company');
             var company = $('<span/>').addClass('message__company').html('<strong>' + userCompany + '</strong>');
@@ -118,37 +119,43 @@ $(function() {
 
         textMessage.append(messageUserName, company, timeStamp);
 
-        //definindo disposição das mensagens
+        //defines disposition of messages
         if (userId % 3 != 0) {
             avatar.addClass('message--right');
             textMessage.addClass('message--left');
 
-            //confirmacao de leitura
+            //checking reading
             if (readMessage) {
                 textMessage.addClass('message--read');
             } else {
                 textMessage.addClass('message--unread');
-
             }
+
+
         } else {
             avatar.addClass('message--left');
             textMessage.addClass('message--right');
         }
 
-
-
         divMessage.append(avatar, textMessage);
         $('.chat__messages').append(divMessage);
     }
 
+    //event to send a new message
     $(".chat__boxMessage").keypress(function(e) {
     	if(e.which == 13){
     		newMessage = $(this).val();
     		sendNewMessage(newMessage);
-    		$(this).val($(this).data('placeholder'));
+    		$(this).val(' ');
+
+    		$('html,body').animate({
+        scrollTop: $(".chat__messages").offset().top},
+        'slow');
       	 }
     });
 
+
+    //send new message
     function sendNewMessage(message) {
     	
         userId = 9483484;
@@ -163,4 +170,4 @@ $(function() {
 
         $('.chat__boxMessage').empty();
     }
-})
+});

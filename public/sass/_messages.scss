@@ -7,11 +7,8 @@
         .message {
             height: auto;
             width: 100%;
-            min-height: 92px;
             margin-bottom: 10px;
-            @media (max-width: 320px) {
-                min-height: 112px;
-            }
+            display: table;
             .message__avatar {
                 width: 92px;
                 height: 92px;
@@ -26,35 +23,38 @@
                 background: #dddddd;
                 font-style: italic;
                 font-family: "Arial";
-                font-size: 16px;
+                font-size: 1em;
                 color: #666;
-                padding: 10px 10px 30px;
+                padding: 10px 10px 20px;
                 position: relative;
                 line-height: 1.2;
                 word-wrap: break-word;
                 @media (max-width: 320px) {
                     width: 220px;
+                    line-height: 1em;
                 }
                 .message__time {
                     font-size: 11px;
-                    position: absolute;
-                    bottom: 5px;
                 }
                 .message__user {
                     font-size: 14px;
-                    position: absolute;
-                    bottom: 15px;
+                    display: block;
+                    margin-top: 20px;
+                    
+                    @media (max-width: 320px) {
+                        margin-top: 20px!important;
+                    }
                 }
                 &.message--right {
-                    padding-left: 140px;
+                    padding-left: 150px;
                     @media (max-width: 320px) {
-                        padding: 0;
+                        padding: 10px;
                     }
                 }
                 &.message--left {
                     padding-right: 140px;
                     @media (max-width: 320px) {
-                        padding: 0;
+                        padding: 10px;
                     }
                 }
             }
@@ -72,12 +72,20 @@
                     border-color: rgba(221, 221, 221, 0);
                     border-right-color: #ddd;
                     border-width: 8px;
-                    // margin-top: -20px;
                 }
-                .message__time,
+
+                .message__company,
                 .message__user,
-                .message__company {
-                    left: 5px;
+                .message__time {
+                    float: left;
+                    margin-left: -130px;
+                    clear: both;
+                    
+                    @media (max-width: 320px) {
+                        margin: 0;
+                        float: none;
+                    }
+
                 }
             }
             .message--left {
@@ -94,23 +102,24 @@
                     border-color: rgba(221, 221, 221, 0);
                     border-left-color: #ddd;
                     border-width: 8px;
-                    // margin-top: -20px;
                 }
-                .message__time,
+                .message__company,
                 .message__user,
-                .message__company {
-                    right: 5px;
+                .message__time {
+                    float: right;
+                    margin-right: -130px;
+                    clear: both;
+
+                    @media (max-width: 320px) {
+                        margin: 0;
+                    }
+
                 }
             }
             .message--company {
-                height: 92px;
-                .message__user {
-                    bottom: 35px;
-                }
                 .message__company {
                     font-size: 14px;
-                    position: absolute;
-                    bottom: 18px;
+                    display: block;
                 }
             }
             .message--read:before,
@@ -120,9 +129,8 @@
                 width: 16px;
                 height: 16px;
                 background: url("../img/sprite.png") no-repeat 0 0 transparent;
-                float: left;
                 position: absolute;
-                bottom: 10px;
+                bottom: 15px;
             }
             .message--read:before {
                 background-position: -18px -2px;

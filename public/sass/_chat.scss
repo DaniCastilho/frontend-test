@@ -26,9 +26,8 @@
             float: left;
             margin-right: 255px;
             letter-spacing: -0.5px;
-            
             @media (max-width: 320px) {
-               margin-right: 25px;
+                margin-right: 25px;
             }
         }
     }
@@ -46,5 +45,8 @@
         font-size: 14px;
         color: #666;
         font-style: italic;
+        @media (max-width: 320px) {
+           width: 290px;
+        }
     }
 }
